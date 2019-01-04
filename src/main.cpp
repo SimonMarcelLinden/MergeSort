@@ -15,7 +15,48 @@
 #include "./header/main.h"
 
 int main() {
+    int choice,
+            amountData;
+    string listName;
 
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    while (true) {
+
+        cout << "1) Listenobjekt erstellen" << endl;
+        cout << "2) Liste mittels Heap Sort sortierung" << endl;
+        cout << "3) Liste mittels Mewrge Sort sotieren" << endl;
+        cout << "4) Daten in Liste schreiben" << endl;
+        cout << "7) Programm beenden" << endl;
+
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                cout << "Gebe an wie viele Daten erzeugt werden sollen:" << endl;
+                cin >> amountData;
+                cout << "Aus welcher Liste sollen die Daten bezogen werden?" << endl <<
+                     "Daten1.csv oder Daten2.csv" << endl;
+                cin >> listName;
+                //TODO: Aufruf der der Funktion zum erstellen der Doppeltverketteten Liste.
+            }
+            case 2: {
+                cout << "Liste wird nun mittzels Heap-Sort sotiert und ausgegeben.";
+                //TODO: Aufruf der Funktion Heap-Sort
+                //TODO: Aufruf der Funktion der Ausgabe Liste
+                break;
+            }
+            case 3: {
+                cout << "Liste wird nun mittzels Merge-Sort sotiert und ausgegeben.";
+                //TODO: Aufruf der Funktion Merge-Sort
+                //TODO: Aufruf der Funktion der Ausgabe Liste
+                break;
+            }
+            case 4: {
+                break;
+            }
+            default: {
+                cout << "Falsche Eingabe" << endl;
+                break;
+            }
+        }
+    }
 }

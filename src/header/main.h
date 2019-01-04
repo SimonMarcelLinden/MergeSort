@@ -12,5 +12,6 @@
 
 using namespace std;
 
+#include "../header/DVKE.h"
 
 #endif //SELECTIONSORT_MAIN_H

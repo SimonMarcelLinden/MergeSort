@@ -10,4 +10,6 @@ add_executable(SelectionSort
         ../SelectionSort/src/header/MyClasses.h
         ../SelectionSort/src/classes/SortsTest.cpp
         ../SelectionSort/src/header/SortsTest.h
+        ../SelectionSort/src/classes/DVKE.cpp
+        ../SelectionSort/src/header/DVKE.h
         )
