@@ -6,9 +6,11 @@
 #define SELECTIONSORT_MAIN_H
 
 
-class main {
+#include <iostream>
+#include <string>
+#include <string.h>
 
-};
+using namespace std;
 
 
 #endif //SELECTIONSORT_MAIN_H
