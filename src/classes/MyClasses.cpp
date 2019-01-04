@@ -12,17 +12,21 @@
 #include <iostream>
 #include "math.h"
 
-#include MyClasses.h
+#include "../header/MyClasses.h"
 
 //class DVKE
-DVKE::DVKE(...);
+DVKE::DVKE(
 
-...???
+);
+
+//...???
 
 //class GEOKO
-GEOKO::GEOKO(...);
+GEOKO::GEOKO(
 
-... ??? ...
+);
+
+//... ??? ...
 
 bool GEOKO::operator
 ???(GEOKO &);
@@ -69,17 +73,17 @@ void DVK::heapSort() {
 
 void DVK::vertausche(long First, long Second) {
 
-    ... ??? ...
+    // ... ??? ...
 
 }//void vertausche(?)
 
 //nur eins davon
-void DVK::selectionSort() { ... }
+void DVK::selectionSort() {}
 
-void DVK::insertionSort() { ... }
+void DVK::insertionSort() {}
 
-void DVK::mergeSort() { ... }
+void DVK::mergeSort() {}
 
-void DVK::quickSort() { ... }
+void DVK::quickSort() {}
 
-void DVK::bubbleSort() { ... }
+void DVK::bubbleSort() {}

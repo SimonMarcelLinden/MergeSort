@@ -40,7 +40,7 @@ bool operator
 class DVK : private DVKE {
     long Anz;
     long Max;
-    ...???
+    //...???
     Index;
 
 public:
@@ -52,13 +52,13 @@ public:
 
     void heapDown(long, long);
 
-    erzeugeHeap(long Anzahl)
+    erzeugeHeap(long Anzahl);
 
     void vertausche(long First, long Second);
 
     void // bubbleSort() insertionSort() mergeSort() quickSort() selectionSort()       ;
 
-    ... ??? ...
+    //... ??? ...
 
 
 };
