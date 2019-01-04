@@ -12,4 +12,6 @@ add_executable(SelectionSort
         ../SelectionSort/src/header/SortsTest.h
         ../SelectionSort/src/classes/DVKE.cpp
         ../SelectionSort/src/header/DVKE.h
+        ../SelectionSort/src/classes/GEOKO.cpp
+        ../SelectionSort/src/header/GEOKO.h
         )
