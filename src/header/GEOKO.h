@@ -19,7 +19,6 @@
 class GEOKO {
 public:
     GEOKO();
-
     ~GEOKO();
 
 private:
@@ -34,30 +33,19 @@ protected:
     void Data();
 
 public:
-    void setBrGr(int BrGr);
-
-    void setLaGr(int LaGr);
-
-    void setBrMin(int BrMin);
-
-    void setLaMin(int LaMin);
-
-    void setBrSec(double BrSec);
-
-    void setLaSec(double LaSec);
-
     int getBrGr();
-
     int getLaGr();
-
     int getBrMin();
-
     int getLaMin();
-
     double getBrSec();
-
     double getLaSec();
+    void setBrGr(int BrGr);
+    void setLaGr(int LaGr);
+    void setBrMin(int BrMin);
+    void setLaMin(int LaMin);
+    void setBrSec(double BrSec);
+    void setLaSec(double LaSec);
+    static void UmrechnungZuGeo(double secLong, double *sec, int *min, int *gr);
 };
-
 
 #endif //SELECTIONSORT_GEOKO_H

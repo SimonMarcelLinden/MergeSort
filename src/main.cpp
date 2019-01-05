@@ -1,7 +1,7 @@
 /**
  * @editor     CLion
  * @since      1.0.0
- * @package    Sel3ectionSort
+ * @package    SelectionSort
  * @subpackage ./src
  * @author Jakob Hoefker <jakob.hoefker@smail.th-koeln.de>
  * @author Simon Marcel Linden <simon_marcel.linden@smail.th-koeln.de>
@@ -15,8 +15,7 @@
 #include "./header/main.h"
 
 int main() {
-    int choice,
-            amountData;
+    int choice, amountData;
     string listName;
 
     while (true) {

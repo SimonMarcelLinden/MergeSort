@@ -28,16 +28,11 @@ private:
     DVKE *N;
     DVKE *V;
 
-protected:
-    void Data();
-
 public:
+    void *Data;
     DVKE *getNext() const;
-
     void setNext(DVKE *N);
-
     DVKE *getPrevious() const;
-
     void setPrevious(DVKE *V);
 };
 
