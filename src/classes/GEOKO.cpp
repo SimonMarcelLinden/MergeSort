@@ -16,26 +16,62 @@
 
 GEOKO::GEOKO() {};
 
-void GEOKO::setBrGr(int BrGr) {};
+// Getter/Setter
+int GEOKO::getBrGr() {
+    return this->BrGr;
+};
 
-void GEOKO::setLaGr(int LaGr) {};
+int GEOKO::getLaGr() {
+    return this->LaGr;
+};
 
-void GEOKO::setBrMin(int BrMin) {};
+int GEOKO::getBrMin() {
+    return this->BrMin;
+};
 
-void GEOKO::setLaMin(int LaMin) {};
+int GEOKO::getLaMin() {
+    return this->LaMin;
+};
 
-void GEOKO::setBrSec(double BrSec) {};
+double GEOKO::getBrSec() {
+    return this->BrSec;
+};
 
-void GEOKO::setLaSec(double LaSec) {};
+double GEOKO::getLaSec() {
+    return this->LaSec;
+};
 
-int GEOKO::getBrGr() { this->BrGr = BrGr; };
+void GEOKO::setBrGr(int BrGr) {
+    this->BrGr = BrGr;
+};
 
-int GEOKO::getLaGr() { this->LaGr = LaGr; };
+void GEOKO::setLaGr(int LaGr) {
+ this->LaGr = LaGr;
+};
 
-int GEOKO::getBrMin() { this->BrMin = BrMin; };
+void GEOKO::setBrMin(int BrMin) {
+    this->BrMin = BrMin;
+};
 
-int GEOKO::getLaMin() { this->LaMin = LaMin; };
+void GEOKO::setLaMin(int LaMin) {
+    this->LaMin = LaMin;
+};
 
-double GEOKO::getBrSec() { this->BrSec = BrSec; };
+void GEOKO::setBrSec(double BrSec) {
+    this->BrSec = BrSec;
+};
 
-double GEOKO::getLaSec() { this->LaSec = LaSec; };
+void GEOKO::setLaSec(double LaSec) {
+    this->LaSec = LaSec;
+};
+
+void GEOKO::UmrechnungZuGeo(double secLong, double *sec, int *min, int *gr) {
+    double temp = secLong / 3600.0;
+    *gr = (int) temp;
+    temp = temp - *gr;
+    temp = temp * 60;
+    *min = (int) temp;
+    temp = temp - *min;
+    temp = temp * 60;
+    *sec = temp;
+}

@@ -1,42 +1,24 @@
-/**
- * @editor     CLion
- * @since      1.0.0
- * @package    SelectionSort
- * @subpackage ./src/header
- * @author Jakob Hoefker <jakob.hoefker@smail.th-koeln.de>
- * @author Simon Marcel Linden <simon_marcel.linden@smail.th-koeln.de>
- * @date 01.01.2019
- *
- * Algorithmen und Datenstrukturen
- * Praktikum - 3
- * @team Team 25
- */
+//
+// Created by Jakob on 05.01.2019.
+//
 
 #ifndef SELECTIONSORT_DVK_H
 #define SELECTIONSORT_DVK_H
 
-//#include "DVKE.h"
+#include "DVKE.h"
+#include "GEOKO.h"
 
-class DVK : private DVKE {
-private:
-    int maxAmount;      //Anzahl der maximalen Listenelemente
-    int currentAmount;  //Anzahl der tatsächlichen Listenelemente
-
-
-
+class DVK : DVKE {
+    long Anz;
+    long Max;
 public:
-    DVK();
-
-    bool appending(GEOKO *); // Funktion zum ANgängen neuer Elmente.
+    DVK(int Anzahl);
+    ~DVK();
+    bool anhaenge(GEOKO *);
     void heapSort();
-
-    int getCurrentAmount();
-
-    void setCurrentAmount(int currentAmount);
-
-    int getMaxAmount();
-
-    void setMaxAmount(int maxAmount);
+    void heapDown(long, long);
+    void erzeugeHeap(long Anzahl);
+    void vertausche(long First, long Second);
+    void mergeSort();
 };
-
 #endif //SELECTIONSORT_DVK_H
