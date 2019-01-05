@@ -29,7 +29,7 @@ private:
     DVKE *V;
 
 protected:
-    void Data();
+    void *Data();
 
 public:
     DVKE *getNext() const;

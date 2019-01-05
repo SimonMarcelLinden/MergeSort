@@ -19,8 +19,7 @@ int main() {
             amountData;
     string listName;
 
-    while (true) {
-
+    do {
         cout << "1) Listenobjekt erstellen" << endl;
         cout << "2) Liste mittels Heap Sort sortierung" << endl;
         cout << "3) Liste mittels Mewrge Sort sotieren" << endl;
@@ -53,10 +52,13 @@ int main() {
             case 4: {
                 break;
             }
+            case 7: {
+                return 1;
+            }
             default: {
                 cout << "Falsche Eingabe" << endl;
                 break;
             }
         }
-    }
+    } while (true);
 }

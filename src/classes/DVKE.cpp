@@ -30,7 +30,7 @@ DVKE::DVKE(DVKE *N, DVKE *V) {
 
 DVKE::~DVKE() {}
 
-void DVKE::Data() {};
+void *DVKE::Data() {};
 
 DVKE *DVKE::getNext() const {
     return N;

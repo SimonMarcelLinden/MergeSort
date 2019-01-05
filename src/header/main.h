@@ -25,5 +25,7 @@ using namespace std;
 
 #include "../header/GEOKO.h"
 #include "../header/DVKE.h"
+#include "../header/DVK.h"
+
 
 #endif //SELECTIONSORT_MAIN_H
