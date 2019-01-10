@@ -10,6 +10,8 @@ add_executable(MergeSort
         ../MergeSort/src/header/MyClasses.h
         ../MergeSort/src/classes/SortsTest.cpp
         ../MergeSort/src/header/SortsTest.h
+        ../MergeSort/src/classes/DVK.cpp
+        ../MergeSort/src/header/DVK.h
         ../MergeSort/src/classes/DVKE.cpp
         ../MergeSort/src/header/DVKE.h
         ../MergeSort/src/classes/GEOKO.cpp

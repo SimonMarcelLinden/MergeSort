@@ -22,7 +22,7 @@ private:
     int maxAmount;      //Anzahl der maximalen Listenelemente
     int currentAmount;  //Anzahl der tatsächlichen Listenelemente
 
-
+    DVKE *index;
 
 public:
     DVK();

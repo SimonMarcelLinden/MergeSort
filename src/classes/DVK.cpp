@@ -15,12 +15,9 @@
 #include "../header/main.h"
 #include "../header/DVK.h"
 
-DVK::DVK() : DVKE() {
-
-};
+DVK::DVK() : DVKE() {};
 
 bool DVK::appending(GEOKO *) {
-
     return true;
 }
 

@@ -19,14 +19,15 @@
 class DVKE {
 public:
     DVKE();
-    DVKE(DVKE *N, DVKE *V);
+
+    DVKE(DVKE *N, DVKE *P);
     ~DVKE();
 
 private:
     // *V: Pointer to the predecessor element
     // *N: Pointer to the successor element
-    DVKE *N;
-    DVKE *V;
+    DVKE *next;
+    DVKE *previous;
 
 protected:
     void *Data();

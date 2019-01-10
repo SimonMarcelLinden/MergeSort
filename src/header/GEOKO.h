@@ -18,7 +18,7 @@
 
 class GEOKO {
 public:
-    GEOKO();
+    GEOKO(int latDeg, int latMin, double latSec, int longDeg, int longMin, double longSec) {};
     ~GEOKO();
 
 private:
@@ -46,6 +46,8 @@ public:
     void setBrSec(double BrSec);
     void setLaSec(double LaSec);
     static void UmrechnungZuGeo(double secLong, double *sec, int *min, int *gr);
+
+    void print();
 };
 
 #endif //SELECTIONSORT_GEOKO_H

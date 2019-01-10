@@ -14,7 +14,7 @@
 
 #include "../header/main.h"
 
-GEOKO::GEOKO() {};
+GEOKO::GEOKO(int latDeg, int latMin, double latSec, int longDeg, int longMin, double longSec) {};
 
 // Getter/Setter
 int GEOKO::getBrGr() {
@@ -65,6 +65,7 @@ void GEOKO::setLaSec(double LaSec) {
     this->LaSec = LaSec;
 };
 
+//TODO: funktion löschen
 void GEOKO::UmrechnungZuGeo(double secLong, double *sec, int *min, int *gr) {
     double temp = secLong / 3600.0;
     *gr = (int) temp;
@@ -74,4 +75,10 @@ void GEOKO::UmrechnungZuGeo(double secLong, double *sec, int *min, int *gr) {
     temp = temp - *min;
     temp = temp * 60;
     *sec = temp;
+}
+
+
+void GEOKO::print() {
+    printf("Laengengrad: (%d|%d|%lf), Breitengrad: (%d|%d|%lf) \n", this->LaGr, this->LaMin, this->LaSec, this->BrGr,
+           this->BrMin, this->BrSec);
 }

@@ -23,9 +23,9 @@ DVKE::DVKE() {}
 
 // *V: Pointer to the predecessor element
 // *N: Pointer to the successor element
-DVKE::DVKE(DVKE *N, DVKE *V) {
-    this->N = N;
-    this->V = V;
+DVKE::DVKE(DVKE *N, DVKE *P) {
+    this->next = N;
+    this->previous = P;
 }
 
 DVKE::~DVKE() {}
@@ -33,17 +33,17 @@ DVKE::~DVKE() {}
 void *DVKE::Data() {};
 
 DVKE *DVKE::getNext() const {
-    return N;
+    return next;
 };
 
 void DVKE::setNext(DVKE *N) {
-    this->N = N;
+    this->next = N;
 };
 
 DVKE *DVKE::getPrevious() const {
-    return V;
+    return previous;
 };
 
 void DVKE::setPrevious(DVKE *V) {
-    this->V = V;
+    this->previous = V;
 };

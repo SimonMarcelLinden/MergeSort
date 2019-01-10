@@ -27,5 +27,6 @@ using namespace std;
 #include "../header/DVKE.h"
 #include "../header/DVK.h"
 
+void readCSV(string csvData, int amount, DVK *list);
 
 #endif //SELECTIONSORT_MAIN_H
