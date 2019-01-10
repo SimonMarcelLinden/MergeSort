@@ -19,8 +19,9 @@
 class DVKE {
 public:
     DVKE();
-
     DVKE(DVKE *N, DVKE *P);
+
+    DVKE(DVKE &dvke);
     ~DVKE();
 
 private:
@@ -33,6 +34,8 @@ protected:
     void *Data();
 
 public:
+
+
     DVKE *getNext() const;
 
     void setNext(DVKE *N);

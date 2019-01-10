@@ -28,6 +28,11 @@ DVKE::DVKE(DVKE *N, DVKE *P) {
     this->previous = P;
 }
 
+DVKE::DVKE(DVKE &dvke) {
+    this->next = dvke.getNext();
+    this->previous = dvke.getPrevious();
+}
+
 DVKE::~DVKE() {}
 
 void *DVKE::Data() {};

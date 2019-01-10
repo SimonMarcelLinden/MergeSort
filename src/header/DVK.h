@@ -17,15 +17,20 @@
 
 //#include "DVKE.h"
 
-class DVK : private DVKE {
+class DVK : protected DVKE {
 private:
     int maxAmount;      //Anzahl der maximalen Listenelemente
     int currentAmount;  //Anzahl der tatsächlichen Listenelemente
 
-    DVKE *index;
+    DVKE **index;
+
 
 public:
-    DVK();
+    DVK(DVKE *dvke, GEOKO *geoko);
+
+    DVK(DVK &dvk);
+
+    DVK(int maxAmount);
 
     bool appending(GEOKO *); // Funktion zum ANgängen neuer Elmente.
     void heapSort();

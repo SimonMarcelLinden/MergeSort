@@ -13,9 +13,19 @@
  */
 
 #include "../header/main.h"
+#include "../header/DVKE.h"
 #include "../header/DVK.h"
 
-DVK::DVK() : DVKE() {};
+DVK::DVK(DVKE *dvke, GEOKO *geoko) : DVKE(*dvke) {
+//    this->Data = geoko;
+};
+
+DVK::DVK(int maxAmount) {
+    this->maxAmount = maxAmount;
+    this->currentAmount = maxAmount;
+
+    this->index = new DVK *[maxAmount];
+}
 
 bool DVK::appending(GEOKO *) {
     return true;

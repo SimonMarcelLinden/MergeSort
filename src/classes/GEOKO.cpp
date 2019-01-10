@@ -14,7 +14,14 @@
 
 #include "../header/main.h"
 
-GEOKO::GEOKO(int latDeg, int latMin, double latSec, int longDeg, int longMin, double longSec) {};
+GEOKO::GEOKO(int latDeg, int latMin, double latSec, int longDeg, int longMin, double longSec) {
+    this->BrGr = latDeg;
+    this->BrMin = latMin;
+    this->BrSec = latSec;
+    this->LaGr = longDeg;
+    this->LaMin = longMin;
+    this->LaSec = longSec;
+};
 
 // Getter/Setter
 int GEOKO::getBrGr() {

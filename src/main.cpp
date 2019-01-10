@@ -20,7 +20,7 @@ int main() {
     int choice, amountData = 0;
     int listName;
 
-    DVK doubleList;
+    DVK *doubleList = new DVK(0);
 
     do {
         printf("1) Listenobjekt erstellen\n");
@@ -34,7 +34,13 @@ int main() {
         switch (choice) {
             case 1: {
                 printf("Gebe an wie viele Daten erzeugt werden sollen:\n");
-                cin >> amountData;
+                do {
+                    cin >> amountData;
+                    if (amountData <= 0) {
+                        printf("Bitte eine gueltige Groesse angeben");
+                    }
+                } while (amountData <= 0);
+
                 printf("Aus welcher Liste sollen die Daten bezogen werden?\n"
                        "[1] Daten1.csv\n"
                        "[2] Daten2.csv\n"
@@ -45,10 +51,18 @@ int main() {
                         printf("Keine gueltige Eingabe");
                 } while (listName < 0 or listName > 2);
 
-                readCSV((listName == 0) ? "Daten1.csv" : "Daten2.csv", amountData, &doubleList);
+
+                doubleList->setMaxAmount(amountData);
+
+                if (listName == 1) {
+                    readCSV("Daten1.csv", amountData, doubleList);
+                } else if (listName == 2) {
+                    readCSV("Daten2.csv", amountData, doubleList);
+                }
 
 
                 //TODO: Aufruf der der Funktion zum erstellen der Doppeltverketteten Liste.
+                break;
             }
             case 2: {
                 printf("Liste wird nun mittzels Heap-Sort sotiert und ausgegeben.\n");
@@ -78,6 +92,7 @@ int main() {
 
 void readCSV(string dataPath, int amount, DVK *list) {
     int index = 0;
+    string line;
 
     string sLatitude;    // Breitengrad
     string sLongitude;   // Längengrad
@@ -94,27 +109,35 @@ void readCSV(string dataPath, int amount, DVK *list) {
     double latSec;
     double longSec;
 
-    ifstream dataCsv(dataPath);
 
-    while (dataCsv.good() && index < amount) {
-        string laengengrad_S;
-        string breitengrad_S;
-        getline(dataCsv, sLatitude, ',');
-        getline(dataCsv, sLongitude, '\n');
+    ifstream input;
+    input.open(dataPath, ios::in); // Datei öffnen
 
-        sscanf(breitengrad_S.c_str(), "%lf", &latitude);
-        sscanf(laengengrad_S.c_str(), "%lf", &longitude);
+    if (input.is_open()) {
+        while (index < amount) {
+            getline(input, sLatitude, ',');
+            getline(input, sLongitude, '\n');
 
-        latDeg = latitude / 3600;
-        latMin = latitude / 60 - latDeg * 60;
-        latSec = latitude - latMin * 60 - latDeg * 60 * 60;
+            sscanf(sLatitude.c_str(), "%lf", &latitude);
+            sscanf(sLongitude.c_str(), "%lf", &longitude);
 
-        longDeg = longitude / 3600;
-        longMin = longitude / 60 - longDeg * 60;
-        longSec = longitude - longMin * 60 - longDeg * 60 * 60;
+            latDeg = (int) latitude / 3600;
+            latMin = (int) latitude / 60 - latDeg * 60;
+            latSec = latitude - latMin * 60 - latDeg * 60 * 60;
 
-        GEOKO *geoko = new GEOKO(latDeg, latMin, latSec, longDeg, longMin, longSec);
-        geoko->print();
-        i++;
+            longDeg = (int) longitude / 3600;
+            longMin = (int) longitude / 60 - longDeg * 60;
+            longSec = longitude - longMin * 60 - longDeg * 60 * 60;
+
+            GEOKO *geoko = new GEOKO(latDeg, latMin, latSec, longDeg, longMin, longSec);
+//            geoko->print();
+            list->appending(geoko);
+
+
+            index++;
+        }
+        input.close();
+    } else {
+        cerr << "Fehler beim Lesen!" << endl;
     }
 }

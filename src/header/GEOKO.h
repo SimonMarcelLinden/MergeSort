@@ -18,7 +18,7 @@
 
 class GEOKO {
 public:
-    GEOKO(int latDeg, int latMin, double latSec, int longDeg, int longMin, double longSec) {};
+    GEOKO(int latDeg, int latMin, double latSec, int longDeg, int longMin, double longSec);
     ~GEOKO();
 
 private:
@@ -31,7 +31,6 @@ private:
 
 protected:
     void Data();
-
 public:
     int getBrGr();
     int getLaGr();
