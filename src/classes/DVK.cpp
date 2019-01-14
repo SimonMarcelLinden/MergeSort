@@ -67,10 +67,16 @@ void DVK::printForward() {
         DVKE *temp = this->head;
         printf("Liste - Forward \n");
         while (temp != NULL) {
-            printf("%d. Laengengrad: %lf (%dgr, %d', %lf'')| Breitengrad: (%lf %dgr, %d', %lf'') \n", i,
-                   temp->getData()->getLaengengrad_dez(), temp->getData()->getLaGr(), temp->getData()->getLaMin(),
+            printf("%d - Laengengrad: %lf (%d Grad, %d' Minute, %lf Sekunde')\tBreitengrad: %lf (%d Grad, %d' Minute, %lf Sekunde') \n",
+                   i,
+                   temp->getData()->getLaengengrad_dez(),
+                   temp->getData()->getLaGr(),
+                   temp->getData()->getLaMin(),
                    temp->getData()->getLaSec(),
-                   temp->getData()->getBreitengrad_dez(), temp->getData()->getBrGr(), temp->getData()->getBrMin(),
+
+                   temp->getData()->getBreitengrad_dez(),
+                   temp->getData()->getBrGr(),
+                   temp->getData()->getBrMin(),
                    temp->getData()->getBrSec());
             temp = temp->getNext();
             i++;
@@ -86,10 +92,16 @@ void DVK::printReverse() {
         DVKE *temp = this->tail;
         printf("Liste - Reverse \n");
         while (temp != NULL) {
-            printf("%d. Laengengrad: %lf (%dgr, %d', %lf'')| Breitengrad: (%lf %dgr, %d', %lf'') \n", i,
-                   temp->getData()->getLaengengrad_dez(), temp->getData()->getLaGr(), temp->getData()->getLaMin(),
+            printf("%d - Laengengrad: %lf (%d Grad, %d' Minute, %lf Sekunde')\tBreitengrad: %lf (%d Grad, %d' Minute, %lf Sekunde') \n",
+                   i,
+                   temp->getData()->getLaengengrad_dez(),
+                   temp->getData()->getLaGr(),
+                   temp->getData()->getLaMin(),
                    temp->getData()->getLaSec(),
-                   temp->getData()->getBreitengrad_dez(), temp->getData()->getBrGr(), temp->getData()->getBrMin(),
+
+                   temp->getData()->getBreitengrad_dez(),
+                   temp->getData()->getBrGr(),
+                   temp->getData()->getBrMin(),
                    temp->getData()->getBrSec());
             temp = temp->getPrev();
             i++;
@@ -98,7 +110,7 @@ void DVK::printReverse() {
 }
 
 void DVK::calculateMiddlepoint() {
-    // TODO: richtige Berechnung
+    // TODO: richtige Berechnung?
     double temp_laengengrad_dez = 0.0;
     double temp_breitengrad_dez = 0.0;
     int temp_BrGr = 0;
@@ -108,7 +120,7 @@ void DVK::calculateMiddlepoint() {
     int temp_LaMin = 0;
     double temp_LaSec = 0.0;
 
-    for (int i = 0; i < this->max; i++) {
+    for (int i = 0; i < this->amount; i++) {
         temp_laengengrad_dez += allElements[i].getData()->getLaengengrad_dez();
         temp_breitengrad_dez += allElements[i].getData()->getBreitengrad_dez();
         temp_BrGr += allElements[i].getData()->getBrGr();
@@ -119,14 +131,14 @@ void DVK::calculateMiddlepoint() {
         temp_LaSec += allElements[i].getData()->getLaSec();
     }
 
-    middlepoint->setLaengengrad_dez(temp_laengengrad_dez / this->max);
-    middlepoint->setBreitengrad_dez(temp_breitengrad_dez / this->max);
-    middlepoint->setBrGr(temp_BrGr / this->max);
-    middlepoint->setBrMin(temp_BrMin / this->max);
-    middlepoint->setBrSec(temp_BrSec / this->max);
-    middlepoint->setLaGr(temp_LaGr / this->max);
-    middlepoint->setLaMin(temp_LaMin / this->max);
-    middlepoint->setLaSec(temp_LaSec / this->max);
+    middlepoint->setLaengengrad_dez(temp_laengengrad_dez / this->amount);
+    middlepoint->setBreitengrad_dez(temp_breitengrad_dez / this->amount);
+    middlepoint->setBrGr(temp_BrGr / this->amount);
+    middlepoint->setBrMin(temp_BrMin / this->amount);
+    middlepoint->setBrSec(temp_BrSec / this->amount);
+    middlepoint->setLaGr(temp_LaGr / this->amount);
+    middlepoint->setLaMin(temp_LaMin / this->amount);
+    middlepoint->setLaSec(temp_LaSec / this->amount);
 }
 
 GEOKO *DVK::getMiddlepoint() {
@@ -136,13 +148,21 @@ GEOKO *DVK::getMiddlepoint() {
 void DVK::calculateDistanceMiddlepoint() {
     // TODO: richtige Abstandsberechnung
     double distance;
-    for (int i = 0; i < this->max; i++) {
-        distance = (double) rand() / 100;
-        allElements[i].setDistance(distance);
+    double x1, x2, y1, y2;
 
+    x1 = middlepoint->getBreitengrad_dez();
+    x2 = middlepoint->getLaengengrad_dez();
+
+    for (int i = 0; i < this->max; i++) {
+        //distance = sqrt(pow((x2-x1), 2) + pow((y2-y1), 2));
+
+        y1 = allElements[i].getData()->getBreitengrad_dez();
+        y2 = allElements[i].getData()->getLaengengrad_dez();
+
+        distance = sqrt(pow((x2 - x1), 2) + pow((y2 - y1), 2));
+        allElements[i].setDistance(distance);
     }
 }
-
 
 DVKE *DVK::getAlleElemente() {
     return this->allElements;

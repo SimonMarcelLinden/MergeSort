@@ -39,18 +39,19 @@ int main() {
     do {
         cout << endl;
         cout << "(1) Datensatz einlesen" << endl;
-        cout << "(2) Liste anzeigen - Forward-Verkettung" << endl;
-        cout << "(3) Liste anzeigen - Reverse-Verkettung" << endl;
-        cout << "(4) Liste anzeigen - Array" << endl;
-        cout << "(5) Mittelpunkt anzeigen" << endl;
-        cout << "(6) Liste sortieren mit Heap Sort" << endl;
-        cout << "(7) Liste sortieren mit Merge Sort" << endl;
-        cout << "(8) Daten in Liste schreiben" << endl;
+//        cout << "(2) Liste anzeigen - Forward-Verkettung" << endl;
+//        cout << "(3) Liste anzeigen - Reverse-Verkettung" << endl;
+//        cout << "(4) Liste anzeigen - Array" << endl;
+//        cout << "(5) Element an liste anhaengen." << endl;
+        cout << "(6) Mittelpunkt anzeigen" << endl;
+        cout << "(7) Liste sortieren mit Heap Sort" << endl;
+        cout << "(8) Liste sortieren mit Merge Sort" << endl;
+        cout << "(9) Daten in Liste schreiben" << endl;
 
         cin >> choiceMain;
 
         switch (choiceMain) {
-            case 1:
+            case 1: {
                 cout << "Wie viele Datensaetze sollen eingelesen werden?" << endl;
                 cin >> numberOfSets;
                 do {
@@ -71,6 +72,7 @@ int main() {
                 liste = new DVK(numberOfSets);
                 createDVK(liste, filename, numberOfSets);
                 break;
+            }
             case 2:
                 if (choiceList == false) {
                     cout << errorMessage << endl;
@@ -96,11 +98,20 @@ int main() {
                 if (choiceList == false) {
                     cout << errorMessage << endl;
                 } else {
+                    //TODO: Element auslesen und anhängen
+                    numberOfSets++;
+//                    liste->printAllElements();
+                }
+                break;
+            case 6:
+                if (choiceList == false) {
+                    cout << errorMessage << endl;
+                } else {
                     printf("Mittelpunkt: \n");
                     liste->getMiddlepoint()->print();
                 }
                 break;
-            case 6: {
+            case 7: {
                 if (choiceList == false) {
                     cout << errorMessage << endl;
                 } else {
@@ -118,12 +129,12 @@ int main() {
                 }
                 break;
             }
-            case 7: {
+            case 8: {
                 if (choiceList == false) {
                     cout << errorMessage << endl;
                 } else {
                     printf("Unsortierte Liste \n");
-//                liste->printAllElements();
+
                     printf("Merge Sort \n");
                     MergeSort *mergeSort = new MergeSort;
                     auto start_2 = chrono::steady_clock::now();
@@ -136,7 +147,7 @@ int main() {
                 }
                 break;
             }
-            case 8:
+            case 9:
                 if (choiceList == false) {
                     cout << errorMessage << endl;
                 } else {
@@ -152,33 +163,43 @@ int main() {
 }
 
 void createDVK(DVK *liste, string filename, int numberOfSets) {
+    //datei1.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Erste Zeile ignorieren
     string longitude_String;
     string latitude_String;
     double longitude;
     double latitude;
     int i = 0;
-    ifstream ip(filename + ".csv");
-    if (!ip.is_open()) {
+
+    ifstream input;
+    input.open(filename + ".csv", ios::in); // Datei öffnen
+
+//    ifstream ip(filename + ".csv");
+//    if (!ip.is_open()) {
+//        cout << "Fehler beim Einlesen der Datei" << endl;
+//        return;
+//    }
+//    while (ip.good() && i < numberOfSets) {
+    if (input.is_open()) {
+        while (i < numberOfSets) {
+            getline(input, longitude_String, ',');
+            getline(input, latitude_String, '\n');
+            sscanf(latitude_String.c_str(), "%lf", &latitude);
+            sscanf(longitude_String.c_str(), "%lf", &longitude);
+            liste->addElement(new GEOKO(longitude, latitude));
+            i++;
+        }
+        liste->calculateMiddlepoint();
+        liste->calculateDistanceMiddlepoint();
+    } else {
         cout << "Fehler beim Einlesen der Datei" << endl;
         return;
     }
-    while (ip.good() && i < numberOfSets) {
-        getline(ip, longitude_String, ',');
-        getline(ip, latitude_String, '\n');
-        sscanf(latitude_String.c_str(), "%lf", &latitude);
-        sscanf(longitude_String.c_str(), "%lf", &longitude);
-//        printf("%d. Laengengrad: %lf | Breitengrad: %lf \n", i + 1, laengengrad, latitude);
-//        printf("%d. Laengengrad: %s | Breitengrad: %s \n", i+1, laengengrad_String.c_str(), latitude_String.c_str());
-        liste->addElement(new GEOKO(latitude, latitude));
-        i++;
-    }
-    liste->calculateMiddlepoint();
-    liste->calculateDistanceMiddlepoint();
 }
 
 void writeCSV(DVK *liste, string filename) {
     ofstream myFile;
     filename = filename + "_S.csv";
+
     cout << "Daten werden in " << filename << " geschrieben" << endl;
     myFile.open(filename);
     myFile << "Anzahl der Daten, " << liste->getMax() << ", " << "Mittelpunkt, " << "Laengengrad,  ("

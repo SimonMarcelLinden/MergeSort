@@ -17,12 +17,12 @@
 
 void GEOKO::calculateGeoCoordinates(double longitude_dec, double latitude_dec) {
     // TODO: richtige Umrechnung
-    this->BrGr = latitude_dec / 3600;
-    this->BrMin = latitude_dec / 60 - this->BrGr * 60;
+    this->BrGr = (int) latitude_dec / 3600;
+    this->BrMin = (int) latitude_dec / 60 - this->BrGr * 60;
     this->BrSec = latitude_dec - this->BrMin * 60 - this->BrGr * 60 * 60;
 
-    this->LaGr = longitude_dec / 3600;
-    this->LaMin = longitude_dec / 60 - this->LaGr * 60;
+    this->LaGr = (int) longitude_dec / 3600;
+    this->LaMin = (int) longitude_dec / 60 - this->LaGr * 60;
     this->LaSec = longitude_dec - this->LaMin * 60 * 60;
 }
 
@@ -101,7 +101,13 @@ void GEOKO::setLaSec(double LaSec) {
 }
 
 void GEOKO::print() {
-    printf("Laengengrad: %lf (%dgr, %d', %lf'')| Breitengrad: (%lf %dgr, %d', %lf'') \n", this->getLaengengrad_dez(),
-           this->getLaGr(), this->getLaMin(), this->getLaSec(),
-           this->getBreitengrad_dez(), this->getBrGr(), this->getBrMin(), this->getBrSec());
+    printf("Laengengrad: %lf (%d Grad, %d' Minute, %lf Sekunde')\nBreitengrad: %lf (%d Grad, %d' Minute, %lf Sekunde')\n",
+           this->getLaengengrad_dez(),
+           this->getLaGr(),
+           this->getLaMin(),
+           this->getLaSec(),
+           this->getBreitengrad_dez(),
+           this->getBrGr(),
+           this->getBrMin(),
+           this->getBrSec());
 }
