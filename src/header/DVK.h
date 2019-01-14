@@ -12,36 +12,48 @@
  * @team Team 25
  */
 
-#ifndef SELECTIONSORT_DVK_H
-#define SELECTIONSORT_DVK_H
 
-//#include "DVKE.h"
+#ifndef MERGESORT_DVK_H
+#define MERGESORT_DVK_H
 
-class DVK : protected DVKE {
+
+#include "DVKE.h"
+#include "GEOKO.h"
+#include <iostream>
+#include <math.h>
+
+
+class DVK : public DVKE {
 private:
-    int maxAmount;      //Anzahl der maximalen Listenelemente
-    int currentAmount;  //Anzahl der tatsächlichen Listenelemente
-
-    DVKE **index;
-
-
+    int max;
+    int amount;
+    DVKE *head = NULL;
+    DVKE *tail = NULL;
+    DVKE *neu;
+    DVKE *allElements;
+    GEOKO *middlepoint = new GEOKO();
 public:
-    DVK(DVKE *dvke, GEOKO *geoko);
+    DVK(int max);
 
-    DVK(DVK &dvk);
+    ~DVK();
 
-    DVK(int maxAmount);
+    void addElement(GEOKO *data);
 
-    bool appending(GEOKO *); // Funktion zum ANgängen neuer Elmente.
-    void heapSort();
+    void printAllElements();
 
-    int getCurrentAmount();
+    void printForward();
 
-    void setCurrentAmount(int currentAmount);
+    void printReverse();
 
-    int getMaxAmount();
+    void calculateMiddlepoint();
 
-    void setMaxAmount(int maxAmount);
+    GEOKO *getMiddlepoint();
+
+    void calculateDistanceMiddlepoint();
+
+    DVKE *getAlleElemente();
+
+    int getMax();
 };
 
-#endif //SELECTIONSORT_DVK_H
+#endif //MERGESORT_DVK_H

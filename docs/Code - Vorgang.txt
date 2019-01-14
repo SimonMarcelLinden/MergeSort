@@ -12,12 +12,12 @@ public:
 }; //...class DVKE
 
 class GEOKO
-   int BrGr;
-   int BrMin;
-   double BrSec;
-   int LaGr;
-   int LaMin;
-   double LaSec;
+   int LatGr;
+   int LatMin;
+   double LatSec;
+   int LongSec;
+   int LongMin;
+   double LongSec;
 public:
    GEOKO(...);
 

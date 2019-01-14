@@ -12,43 +12,40 @@
  * @team Team 25
  */
 
-#include "../header/main.h"
-//#include "../header/DVKE.h"
-
-#ifndef NULL
-#define NULL nullptr
-#endif
+#include "../header/DVKE.h"
 
 DVKE::DVKE() {}
 
-// *V: Pointer to the predecessor element
-// *N: Pointer to the successor element
-DVKE::DVKE(DVKE *N, DVKE *P) {
-    this->next = N;
-    this->previous = P;
-}
-
-DVKE::DVKE(DVKE &dvke) {
-    this->next = dvke.getNext();
-    this->previous = dvke.getPrevious();
-}
-
 DVKE::~DVKE() {}
 
-void *DVKE::Data() {};
+DVKE *DVKE::getNext() {
+    return this->next;
+}
 
-DVKE *DVKE::getNext() const {
-    return next;
-};
+void DVKE::setNext(DVKE *next) {
+    this->next = next;
+}
 
-void DVKE::setNext(DVKE *N) {
-    this->next = N;
-};
+DVKE *DVKE::getPrev() {
+    return this->prev;
+}
 
-DVKE *DVKE::getPrevious() const {
-    return previous;
-};
+void DVKE::setPrev(DVKE *prev) {
+    this->prev = prev;
+}
 
-void DVKE::setPrevious(DVKE *V) {
-    this->previous = V;
-};
+double DVKE::getDistance() {
+    return this->distance;
+}
+
+void DVKE::setDistance(double distance) {
+    this->distance = distance;
+}
+
+GEOKO *DVKE::getData() {
+    return this->data;
+}
+
+void DVKE::setData(GEOKO *data) {
+    this->data = data;
+}

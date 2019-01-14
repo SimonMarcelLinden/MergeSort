@@ -11,14 +11,17 @@
  * Praktikum - 3
  * @team Team 25
  */
-//
-//#ifndef SELECTIONSORT_SORTSTEST_H
-//#define SELECTIONSORT_SORTSTEST_H
-//
-//
-//class SortsTest {
-//
-//};
-//
-//
-//#endif //SELECTIONSORT_SORTSTEST_H
+
+#ifndef MERGESORT_MERGESORT_H
+#define MERGESORT_MERGESORT_H
+
+#include "DVKE.h"
+
+class MergeSort {
+public:
+    void merge(DVKE *arr, int l, int m, int r);
+
+    void mergeSort(DVKE *arr, int l, int r);
+};
+
+#endif //MERGESORT_SORTIERUNG_MERGESORT_H

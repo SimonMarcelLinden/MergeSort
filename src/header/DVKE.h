@@ -12,38 +12,38 @@
  * @team Team 25
  */
 
-#ifndef SELECTIONSORT_DVKE_H
-#define SELECTIONSORT_DVKE_H
 
+#ifndef MERGESORT_SORTIERUNG_DVKE_H
+#define MERGESORT_SORTIERUNG_DVKE_H
+
+#include "GEOKO.h"
 
 class DVKE {
+private:
+    GEOKO *data;
+    DVKE *next;
+    DVKE *prev;
+    double distance;
 public:
     DVKE();
-    DVKE(DVKE *N, DVKE *P);
 
-    DVKE(DVKE &dvke);
     ~DVKE();
 
-private:
-    // *V: Pointer to the predecessor element
-    // *N: Pointer to the successor element
-    DVKE *next;
-    DVKE *previous;
+    DVKE *getNext();
 
-protected:
-    void *Data();
+    void setNext(DVKE *next);
 
-public:
+    DVKE *getPrev();
 
+    void setPrev(DVKE *prev);
 
-    DVKE *getNext() const;
+    double getDistance();
 
-    void setNext(DVKE *N);
+    void setDistance(double distance);
 
-    DVKE *getPrevious() const;
+    GEOKO *getData();
 
-    void setPrevious(DVKE *V);
+    void setData(GEOKO *data);
 };
 
-
-#endif //SELECTIONSORT_DVKE_H
+#endif //MERGESORT_DVKE_H

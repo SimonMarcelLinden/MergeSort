@@ -12,21 +12,21 @@
  * @team Team 25
  */
 
+#ifndef MERGESORT_HEAPSORT_H
+#define MERGESORT_HEAPSORT_H
 
-#ifndef SELECTIONSORT_MAIN_H
-#define SELECTIONSORT_MAIN_H
-
-
+#include "DVKE.h"
 #include <iostream>
-#include <string>
-#include <string.h>
 
 using namespace std;
 
-#include "../header/GEOKO.h"
-#include "../header/DVKE.h"
-#include "../header/DVK.h"
+using namespace std;
 
-void readCSV(string csvData, int amount, DVK *list);
+class HeapSort {
+public:
+    void heapify(DVKE *arr, int n, int i);
 
-#endif //SELECTIONSORT_MAIN_H
+    void heapSort(DVKE *arr, int n);
+};
+
+#endif //MERGESORT_HEAPSORT_H

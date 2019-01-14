@@ -12,132 +12,183 @@
  * @team Team 25
  */
 
-#include "./header/main.h"
+#include <iostream>
+#include <string>
 #include <fstream>
 
+#include "./header/DVK.h"
+//#include "./header/DVKE.h"
+//#include "./header/GEOKO.h"
+#include "./header/HeapSort.h"
+#include "./header/MergeSort.h"
+
+#include <chrono>
+
+using namespace std;
+
+void createDVK(DVK *liste, string filename, int numberOfSets);
+
+void writeCSV(DVK *liste, string filename);
 
 int main() {
-    int choice, amountData = 0;
-    int listName;
-
-    DVK *doubleList = new DVK(0);
-
+    int choiceMain, choiceFile, numberOfSets;
+    string filename;
+    bool choiceList = false;
+    string errorMessage = "FEHLER: Bitte erst Datensatz einlesen!";
+    DVK *liste;
     do {
-        printf("1) Listenobjekt erstellen\n");
-        printf("2) Liste mittels Heap Sort sortierung\n");
-        printf("3) Liste mittels Mewrge Sort sotieren\n");
-        printf("4) Daten in Liste schreiben\n");
-        printf("7) Programm beenden\n");
+        cout << endl;
+        cout << "(1) Datensatz einlesen" << endl;
+        cout << "(2) Liste anzeigen - Forward-Verkettung" << endl;
+        cout << "(3) Liste anzeigen - Reverse-Verkettung" << endl;
+        cout << "(4) Liste anzeigen - Array" << endl;
+        cout << "(5) Mittelpunkt anzeigen" << endl;
+        cout << "(6) Liste sortieren mit Heap Sort" << endl;
+        cout << "(7) Liste sortieren mit Merge Sort" << endl;
+        cout << "(8) Daten in Liste schreiben" << endl;
 
-        cin >> choice;
+        cin >> choiceMain;
 
-        switch (choice) {
-            case 1: {
-                printf("Gebe an wie viele Daten erzeugt werden sollen:\n");
+        switch (choiceMain) {
+            case 1:
+                cout << "Wie viele Datensaetze sollen eingelesen werden?" << endl;
+                cin >> numberOfSets;
                 do {
-                    cin >> amountData;
-                    if (amountData <= 0) {
-                        printf("Bitte eine gueltige Groesse angeben");
+                    cout << "(1) Daten aus Daten1.csv einlesen" << endl;
+                    cout << "(2) Daten aus Daten2.csv einlesen" << endl;
+                    cin >> choiceFile;
+                    switch (choiceFile) {
+                        case 1:
+                            filename = "Daten1";
+                            choiceList = true;
+                            break;
+                        case 2:
+                            filename = "Daten2";
+                            choiceList = true;
+                            break;
                     }
-                } while (amountData <= 0);
-
-                printf("Aus welcher Liste sollen die Daten bezogen werden?\n"
-                       "[1] Daten1.csv\n"
-                       "[2] Daten2.csv\n"
-                       "[0] Abbrechen\n");
-                do {
-                    cin >> listName;
-                    if (listName < 0 or listName > 2)
-                        printf("Keine gueltige Eingabe");
-                } while (listName < 0 or listName > 2);
-
-
-                doubleList->setMaxAmount(amountData);
-
-                if (listName == 1) {
-                    readCSV("Daten1.csv", amountData, doubleList);
-                } else if (listName == 2) {
-                    readCSV("Daten2.csv", amountData, doubleList);
+                } while (choiceFile != 1 && choiceFile != 2);
+                liste = new DVK(numberOfSets);
+                createDVK(liste, filename, numberOfSets);
+                break;
+            case 2:
+                if (choiceList == false) {
+                    cout << errorMessage << endl;
+                } else {
+                    liste->printForward();
                 }
-
-
-                //TODO: Aufruf der der Funktion zum erstellen der Doppeltverketteten Liste.
                 break;
-            }
-            case 2: {
-                printf("Liste wird nun mittzels Heap-Sort sotiert und ausgegeben.\n");
-                //TODO: Aufruf der Funktion Heap-Sort
-                //TODO: Aufruf der Funktion der Ausgabe Liste
+            case 3:
+                if (choiceList == false) {
+                    cout << errorMessage << endl;
+                } else {
+                    liste->printReverse();
+                }
                 break;
-            }
-            case 3: {
-                printf("Liste wird nun mittzels Merge-Sort sotiert und ausgegeben.\n");
-                //TODO: Aufruf der Funktion Merge-Sort
-                //TODO: Aufruf der Funktion der Ausgabe Liste
+            case 4:
+                if (choiceList == false) {
+                    cout << errorMessage << endl;
+                } else {
+                    liste->printAllElements();
+                }
                 break;
-            }
-            case 4: {
+            case 5:
+                if (choiceList == false) {
+                    cout << errorMessage << endl;
+                } else {
+                    printf("Mittelpunkt: \n");
+                    liste->getMiddlepoint()->print();
+                }
+                break;
+            case 6: {
+                if (choiceList == false) {
+                    cout << errorMessage << endl;
+                } else {
+                    printf("Unsortierte Liste \n");
+//                liste->printAllElements();
+                    printf("Heap Sort \n");
+                    HeapSort *heapSort = new HeapSort;
+                    auto start = chrono::steady_clock::now();
+                    heapSort->heapSort(liste->getAlleElemente(), numberOfSets);
+                    auto end = chrono::steady_clock::now();
+                    double elapseTime = double(chrono::duration_cast<chrono::microseconds>(end - start).count());
+                    printf("\nSortierte Liste \n");
+//                liste->printAllElements();
+                    cout << "\n Heapsort brauchte " << elapseTime << "ms" << endl;
+                }
                 break;
             }
             case 7: {
-                return 1;
-            }
-            default: {
-                printf("Falsche Eingabe\n");
+                if (choiceList == false) {
+                    cout << errorMessage << endl;
+                } else {
+                    printf("Unsortierte Liste \n");
+//                liste->printAllElements();
+                    printf("Merge Sort \n");
+                    MergeSort *mergeSort = new MergeSort;
+                    auto start_2 = chrono::steady_clock::now();
+                    mergeSort->mergeSort(liste->getAlleElemente(), 0, numberOfSets - 1);
+                    auto end_2 = chrono::steady_clock::now();
+                    double elapseTime_2 = double(chrono::duration_cast<chrono::microseconds>(end_2 - start_2).count());
+                    printf("\nSortierte Liste \n");
+//                liste->printAllElements();
+                    cout << "\n MergeSort brauchte " << elapseTime_2 << "ms" << endl;
+                }
                 break;
             }
+            case 8:
+                if (choiceList == false) {
+                    cout << errorMessage << endl;
+                } else {
+                    printf("Daten der Liste schreiben \n");
+                    writeCSV(liste, filename);
+                }
+                break;
+            default:
+                break;
         }
-    } while (true);
+    } while (choiceMain != 0);
+    return 0;
 }
 
-void readCSV(string dataPath, int amount, DVK *list) {
-    int index = 0;
-    string line;
+void createDVK(DVK *liste, string filename, int numberOfSets) {
+    string longitude_String;
+    string latitude_String;
+    double longitude;
+    double latitude;
+    int i = 0;
+    ifstream ip(filename + ".csv");
+    if (!ip.is_open()) {
+        cout << "Fehler beim Einlesen der Datei" << endl;
+        return;
+    }
+    while (ip.good() && i < numberOfSets) {
+        getline(ip, longitude_String, ',');
+        getline(ip, latitude_String, '\n');
+        sscanf(latitude_String.c_str(), "%lf", &latitude);
+        sscanf(longitude_String.c_str(), "%lf", &longitude);
+//        printf("%d. Laengengrad: %lf | Breitengrad: %lf \n", i + 1, laengengrad, latitude);
+//        printf("%d. Laengengrad: %s | Breitengrad: %s \n", i+1, laengengrad_String.c_str(), latitude_String.c_str());
+        liste->addElement(new GEOKO(latitude, latitude));
+        i++;
+    }
+    liste->calculateMiddlepoint();
+    liste->calculateDistanceMiddlepoint();
+}
 
-    string sLatitude;    // Breitengrad
-    string sLongitude;   // Längengrad
-
-    double latitude;    // Breitengrad
-    double longitude;   // Längengrad
-
-    int latDeg;         // Breitengrad
-    int longDeg;        // Längengrad
-
-    int latMin;
-    int longMin;
-
-    double latSec;
-    double longSec;
-
-
-    ifstream input;
-    input.open(dataPath, ios::in); // Datei öffnen
-
-    if (input.is_open()) {
-        while (index < amount) {
-            getline(input, sLatitude, ',');
-            getline(input, sLongitude, '\n');
-
-            sscanf(sLatitude.c_str(), "%lf", &latitude);
-            sscanf(sLongitude.c_str(), "%lf", &longitude);
-
-            latDeg = (int) latitude / 3600;
-            latMin = (int) latitude / 60 - latDeg * 60;
-            latSec = latitude - latMin * 60 - latDeg * 60 * 60;
-
-            longDeg = (int) longitude / 3600;
-            longMin = (int) longitude / 60 - longDeg * 60;
-            longSec = longitude - longMin * 60 - longDeg * 60 * 60;
-
-            GEOKO *geoko = new GEOKO(latDeg, latMin, latSec, longDeg, longMin, longSec);
-//            geoko->print();
-            list->appending(geoko);
-
-
-            index++;
-        }
-        input.close();
-    } else {
-        cerr << "Fehler beim Lesen!" << endl;
+void writeCSV(DVK *liste, string filename) {
+    ofstream myFile;
+    filename = filename + "_S.csv";
+    cout << "Daten werden in " << filename << " geschrieben" << endl;
+    myFile.open(filename);
+    myFile << "Anzahl der Daten, " << liste->getMax() << ", " << "Mittelpunkt, " << "Laengengrad,  ("
+           << liste->getMiddlepoint()->getLaGr() << "gr |" << liste->getMiddlepoint()->getLaMin() << "'|"
+           << liste->getMiddlepoint()->getLaSec() << "'')" << ", Breitengrad, " << liste->getMiddlepoint()->getBrGr()
+           << "gr|" << liste->getMiddlepoint()->getBrMin() << "'|" << liste->getMiddlepoint()->getBrSec() << "'');"
+           << endl;
+    for (int i = 0; i < liste->getMax(); i++) {
+        myFile << i << ", " << liste->getAlleElemente()[i].getData()->getLaengengrad_dez() << ", "
+               << liste->getAlleElemente()[i].getData()->getBreitengrad_dez() << ", "
+               << liste->getAlleElemente()[i].getDistance() << ";" << endl;
     }
 }

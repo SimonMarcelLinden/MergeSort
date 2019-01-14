@@ -12,41 +12,55 @@
  * @team Team 25
  */
 
-#ifndef SELECTIONSORT_GEOKO_H
-#define SELECTIONSORT_GEOKO_H
-
+#ifndef MERGESORT_GEOKO_H
+#define MERGESORT_GEOKO_H
 
 class GEOKO {
-public:
-    GEOKO(int latDeg, int latMin, double latSec, int longDeg, int longMin, double longSec);
-    ~GEOKO();
-
 private:
+    double longitude_dec;
+    double latitude_dec;
     int BrGr;
-    int LaGr;
     int BrMin;
-    int LaMin;
     double BrSec;
+    int LaGr;
+    int LaMin;
     double LaSec;
 
-protected:
-    void Data();
+    void calculateGeoCoordinates(double laengengrad, double latitude);
 public:
-    int getBrGr();
-    int getLaGr();
-    int getBrMin();
-    int getLaMin();
-    double getBrSec();
-    double getLaSec();
-    void setBrGr(int BrGr);
-    void setLaGr(int LaGr);
-    void setBrMin(int BrMin);
-    void setLaMin(int LaMin);
-    void setBrSec(double BrSec);
-    void setLaSec(double LaSec);
-    static void UmrechnungZuGeo(double secLong, double *sec, int *min, int *gr);
+    GEOKO(double longitude_dec, double latitude_dec);
 
+    GEOKO();
+
+    ~GEOKO();
+
+    double getLaengengrad_dez();
+
+    void setLaengengrad_dez(double longitude_dec);
+
+    double getBreitengrad_dez();
+
+    void setBreitengrad_dez(double latitude_dec);
+    int getBrGr();
+
+    void setBrGr(int BrGr);
+    int getBrMin();
+
+    void setBrMin(int BrMin);
+    double getBrSec();
+
+    void setBrSec(double BrSec);
+
+    int getLaGr();
+    void setLaGr(int LaGr);
+
+    int getLaMin();
+    void setLaMin(int LaMin);
+
+    double getLaSec();
+    void setLaSec(double LaSec);
     void print();
 };
 
-#endif //SELECTIONSORT_GEOKO_H
+#endif //KOORDINATEN_SORTIERUNG_GEOKO_H
+
