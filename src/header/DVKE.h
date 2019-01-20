@@ -17,6 +17,7 @@
 #define MERGESORT_SORTIERUNG_DVKE_H
 
 #include "GEOKO.h"
+#include "math.h"
 
 class DVKE {
 private:
@@ -37,13 +38,20 @@ public:
 
     void setPrev(DVKE *prev);
 
-    double getDistance();
+    double getDistance() const;
 
     void setDistance(double distance);
 
     GEOKO *getData();
 
     void setData(GEOKO *data);
+
+    bool operator>(DVKE& geoRigth) const;
+    bool operator<(DVKE& geoRigth) const;
+    bool operator>=(DVKE& geoRigth) const;
+    bool operator<=(DVKE& geoRigth) const;
+    bool operator==(DVKE& geoRigth) const;
+    bool operator!=(DVKE& geoRigth) const;
 };
 
 #endif //MERGESORT_DVKE_H

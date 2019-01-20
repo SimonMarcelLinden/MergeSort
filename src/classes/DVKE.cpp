@@ -34,7 +34,7 @@ void DVKE::setPrev(DVKE *prev) {
     this->prev = prev;
 }
 
-double DVKE::getDistance() {
+double DVKE::getDistance() const {
     return this->distance;
 }
 
@@ -48,4 +48,28 @@ GEOKO *DVKE::getData() {
 
 void DVKE::setData(GEOKO *data) {
     this->data = data;
+}
+
+bool DVKE::operator>(DVKE& geoRight) const {
+    return this->getDistance() > geoRight.getDistance();
+}
+
+bool DVKE::operator<(DVKE& geoRight) const {
+    return this->getDistance() < geoRight.getDistance();
+}
+
+bool DVKE::operator>=(DVKE& geoRight) const {
+    return this->getDistance() >= geoRight.getDistance();
+}
+
+bool DVKE::operator<=(DVKE& geoRight) const {
+    return this->getDistance() <= geoRight.getDistance();
+}
+
+bool DVKE::operator==(DVKE& geoRight) const {
+    return fabs(this->getDistance() - geoRight.getDistance()) <= 0.01;
+}
+
+bool DVKE::operator!=(DVKE& geoRight) const {
+    return fabs(this->getDistance() - geoRight.getDistance()) > 0.01;
 }

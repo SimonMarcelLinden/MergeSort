@@ -41,7 +41,7 @@ int main() {
         cout << "(1) Datensatz einlesen" << endl;
 //        cout << "(2) Liste anzeigen - Forward-Verkettung" << endl;
 //        cout << "(3) Liste anzeigen - Reverse-Verkettung" << endl;
-//        cout << "(4) Liste anzeigen - Array" << endl;
+        cout << "(4) Liste anzeigen - Array" << endl;
 //        cout << "(5) Element an liste anhaengen." << endl;
         cout << "(6) Mittelpunkt anzeigen" << endl;
         cout << "(7) Liste sortieren mit Heap Sort" << endl;

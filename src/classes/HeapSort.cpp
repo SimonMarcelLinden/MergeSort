@@ -14,39 +14,39 @@
 
 #include "../header/HeapSort.h"
 
-void HeapSort::heapify(DVKE *arr, int n, int i) {
+void HeapSort::heapify(DVKE *arr, int laenge, int i) {
     int largest = i; // Initialize largest as root
-    int l = 2 * i + 1; // left = 2*i + 1
-    int r = 2 * i + 2; // right = 2*i + 2
+    int left = 2 * i + 1; // left = 2*i + 1
+    int right = 2 * i + 2; // right = 2*i + 2
 
     // If left child is larger than root
-    if (l < n && arr[l].getDistance() > arr[largest].getDistance())
-        largest = l;
+    if (left < laenge && arr[left] > arr[largest])
+        largest = left;
 
     // If right child is larger than largest so far
-    if (r < n && arr[r].getDistance() > arr[largest].getDistance())
-        largest = r;
+    if (right < laenge && arr[right] > arr[largest])
+        largest = right;
 
     // If largest is not root
     if (largest != i) {
         swap(arr[i], arr[largest]);
 
         // Recursively heapify the affected sub-tree
-        heapify(arr, n, largest);
+        heapify(arr, laenge, largest);
     }
 }
 
-void HeapSort::heapSort(DVKE *arr, int n) {
-    // Build heap (rearrange array)
-    for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(arr, n, i);
+void HeapSort::heapSort(DVKE *arr, int laenge) {
+    // Build heap
+    for (int i = laenge / 2 - 1; i >= 0; i--)
+        heapify(arr, laenge, i);
 
     // One by one extract an element from heap
-    for (int i = n - 1; i >= 0; i--) {
+    for (int i = laenge - 1; i >= 0; i--) {
         // Move current root to end
         swap(arr[0], arr[i]);
 
-        // call max heapify on the reduced heap
+        // max heap
         heapify(arr, i, 0);
     }
 }
